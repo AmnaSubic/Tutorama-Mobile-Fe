@@ -5,3 +5,6 @@ Team Members:
 2. Ervan Zametica
 3. Orhan Secic
 4. Tarik Causevic
+
+\
+In this project folder you can find an sql file for the database to run in MYSQL Workbench.
