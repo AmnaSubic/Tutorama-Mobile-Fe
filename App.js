@@ -1,4 +1,6 @@
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
     StyleSheet,
     View,
@@ -8,35 +10,78 @@ import {
     ProgressViewIOS
 } from 'react-native';
 import Logo from './assets/TutoramaLogo.png';
+import {ProfileScreen} from './screens/profile/Profile';
+import {SearchScreen} from './screens/search/Search';
+import {MenuScreen} from './screens/menu/Menu';
+import { Ionicons } from '@expo/vector-icons';
 
+function Login() {
+    return (
+        <View style={styles.container}>
+            <View style={styles.topContainer}>
+                <Text style={styles.h1}>Welcome to Tutorama.ba</Text>
+                <Text style={styles.h2}>Bosnia and Herzegovina's first tutoring web application.</Text>
+            </View>
+            <View style={styles.middleContainer}>
+                <Image source={Logo} style={styles.image}/>
+            </View>
+            <ProgressViewIOS number={1} />
+            <View style={styles.bottomContainer}>
+                <View style={styles.buttonContainer}>
+                    <Button
+                        title={"Register"}
+                        style={styles.button}
+                        onPress={() => this.onPress()}
+                        color="#fff"
+                    />
+                </View>
+                <View style={styles.hyperlinkContainer}>
+                    <Text style={styles.text}>Already a user?</Text>
+                    <Text style={styles.hyperlink} onPress={() => this.onPress()}>Login</Text>
+                </View>
+          </View>
+        </View>
+      ); 
+}
+
+const Tab = createBottomTabNavigator();
+
+function MyTabs() {
+  return (
+    <Tab.Navigator 
+        screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === 'Profile') {
+            iconName = 'ios-person';
+          } else if (route.name === 'Search') {
+            iconName = 'ios-search';
+          } else if (route.name === 'Menu') {
+              iconName = 'ios-menu'
+          }
+
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: 'tomato',
+        inactiveTintColor: 'gray',
+      }}>
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Search" component={SearchScreen} />
+      <Tab.Screen name="Menu" component={MenuScreen} />
+    </Tab.Navigator>
+  );
+}
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-        <View style={styles.topContainer}>
-            <Text style={styles.h1}>Welcome to Tutorama.ba</Text>
-            <Text style={styles.h2}>Bosnia and Herzegovina's first tutoring web application.</Text>
-        </View>
-        <View style={styles.middleContainer}>
-            <Image source={Logo} style={styles.image}/>
-        </View>
-        <ProgressViewIOS number={1} />
-        <View style={styles.bottomContainer}>
-            <View style={styles.buttonContainer}>
-                <Button
-                    title={"Register"}
-                    style={styles.button}
-                    onPress={() => this.onPress()}
-                    color="#fff"
-                />
-            </View>
-            <View style={styles.hyperlinkContainer}>
-                <Text style={styles.text}>Already a user?</Text>
-                <Text style={styles.hyperlink} onPress={() => this.onPress()}>Login</Text>
-            </View>
-      </View>
-    </View>
-  );
+    const isLoggedIn = false;
+    return (
+        <NavigationContainer>
+          {isLoggedIn ? <MyTabs /> : Login()}
+        </NavigationContainer>
+      );
 }
 
 const styles = StyleSheet.create({
