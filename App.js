@@ -10,9 +10,9 @@ import {
     ProgressViewIOS
 } from 'react-native';
 import Logo from './assets/TutoramaLogo.png';
-import {ProfileScreen} from './screens/profile/Profile';
-import {SearchScreen} from './screens/search/Search';
-import {MenuScreen} from './screens/menu/Menu';
+import { ProfileScreen } from './screens/profile/Profile';
+import { SearchScreen } from './screens/search/Search';
+import { ClassesScreen } from './screens/classes/Classes';
 import { Ionicons } from '@expo/vector-icons';
 
 function Login() {
@@ -57,7 +57,7 @@ function MyTabs() {
             iconName = 'ios-person';
           } else if (route.name === 'Search') {
             iconName = 'ios-search';
-          } else if (route.name === 'Menu') {
+          } else if (route.name === 'Classes') {
               iconName = 'ios-menu'
           }
 
@@ -65,18 +65,18 @@ function MyTabs() {
         },
       })}
       tabBarOptions={{
-        activeTintColor: 'tomato',
+        activeTintColor: 'rgb(10,132,255)',
         inactiveTintColor: 'gray',
       }}>
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-      <Tab.Screen name="Search" component={SearchScreen} />
-      <Tab.Screen name="Menu" component={MenuScreen} />
+        <Tab.Screen name="Search" component={SearchScreen} />
+        <Tab.Screen name="Classes" component={ClassesScreen} />
+        <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 }
 
-export default function App() {
-    const isLoggedIn = false;
+export default function App(){
+    const isLoggedIn = true;
     return (
         <NavigationContainer>
           {isLoggedIn ? <MyTabs /> : Login()}
@@ -143,3 +143,4 @@ const styles = StyleSheet.create({
         padding: 10,
     },
 });
+

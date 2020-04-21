@@ -5,10 +5,10 @@ import {
     StyleSheet
 } from 'react-native';
 
-export function MenuScreen () {
+export function ClassesScreen () {
     return (
         <View style={styles.container}>
-            <Text>Menu</Text>
+            <Text>Classes</Text>
         </View>
     );
 }
