@@ -58,7 +58,7 @@ function MyTabs() {
           } else if (route.name === 'Search') {
             iconName = 'ios-search';
           } else if (route.name === 'Classes') {
-              iconName = 'ios-menu'
+              iconName = 'ios-book'
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
