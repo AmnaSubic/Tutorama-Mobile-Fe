@@ -9,11 +9,12 @@ import {
 import {
     ListItem,
     Header,
-    Avatar, Icon
+    Avatar
 } from 'react-native-elements';
 import AvatarPhoto from '../../assets/Avatar.jpeg'
 
-export function ProfileScreen () {
+export default function Profile ({navigation}) {
+
     const [user, setUser] = useState({
         username: 'amnasubic',
         firstname: 'Amna',
@@ -34,6 +35,7 @@ export function ProfileScreen () {
                     backgroundColor: 'white',
                     width: '100%',
                 }}
+
                 centerComponent={
                     <Text style={styles.title}>{user.type} Profile</Text>
                 }

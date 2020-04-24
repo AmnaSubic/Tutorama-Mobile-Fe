@@ -2,11 +2,14 @@ import React from 'react';
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    Button
 } from 'react-native';
 
-export function SearchScreen () {
+export default function Search ({navigation}) {
+
     return (
+
         <View style={styles.container}>
             <Text>Search</Text>
         </View>

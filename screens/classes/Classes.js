@@ -2,10 +2,11 @@ import React from 'react';
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet, Button
 } from 'react-native';
 
-export function ClassesScreen () {
+export default function Classes ({navigation}) {
+
     return (
         <View style={styles.container}>
             <Text>Classes</Text>

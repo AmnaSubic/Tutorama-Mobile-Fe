@@ -10,37 +10,38 @@ import {
     ProgressViewIOS
 } from 'react-native';
 import Logo from './assets/TutoramaLogo.png';
-import { ProfileScreen } from './screens/profile/Profile';
-import { SearchScreen } from './screens/search/Search';
-import { ClassesScreen } from './screens/classes/Classes';
+import Profile from './screens/profile/Profile';
+import Search from './screens/search/Search';
+import Classes from './screens/classes/Classes';
 import { Ionicons } from '@expo/vector-icons';
+
 
 function Login() {
     return (
-        <View style={styles.container}>
-            <View style={styles.topContainer}>
-                <Text style={styles.h1}>Welcome to Tutorama.ba</Text>
-                <Text style={styles.h2}>Bosnia and Herzegovina's first tutoring web application.</Text>
-            </View>
-            <View style={styles.middleContainer}>
-                <Image source={Logo} style={styles.image}/>
-            </View>
-            <ProgressViewIOS number={1} />
-            <View style={styles.bottomContainer}>
-                <View style={styles.buttonContainer}>
-                    <Button
-                        title={"Register"}
-                        style={styles.button}
-                        onPress={() => this.onPress()}
-                        color="#fff"
-                    />
+            <View style={styles.container}>
+                <View style={styles.topContainer}>
+                    <Text style={styles.h1}>Welcome to Tutorama.ba</Text>
+                    <Text style={styles.h2}>Bosnia and Herzegovina's first tutoring web application.</Text>
                 </View>
-                <View style={styles.hyperlinkContainer}>
-                    <Text style={styles.text}>Already a user?</Text>
-                    <Text style={styles.hyperlink} onPress={() => this.onPress()}>Login</Text>
+                <View style={styles.middleContainer}>
+                    <Image source={Logo} style={styles.image}/>
                 </View>
-          </View>
-        </View>
+                <ProgressViewIOS number={1} />
+                <View style={styles.bottomContainer}>
+                    <View style={styles.buttonContainer}>
+                        <Button
+                            title={"Register"}
+                            style={styles.button}
+                            onPress={() => this.onPress()}
+                            color="#fff"
+                        />
+                    </View>
+                    <View style={styles.hyperlinkContainer}>
+                        <Text style={styles.text}>Already a user?</Text>
+                        <Text style={styles.hyperlink} onPress={() => this.onPress()}>Login</Text>
+                    </View>
+                </View>
+            </View>
       ); 
 }
 
@@ -68,9 +69,9 @@ function MyTabs() {
         activeTintColor: 'rgb(10,132,255)',
         inactiveTintColor: 'gray',
       }}>
-        <Tab.Screen name="Search" component={SearchScreen} />
-        <Tab.Screen name="Classes" component={ClassesScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
+        <Tab.Screen name="Search" component={Search} />
+        <Tab.Screen name="Classes" component={Classes} />
+        <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
 }
@@ -78,9 +79,9 @@ function MyTabs() {
 export default function App(){
     const isLoggedIn = true;
     return (
-        <NavigationContainer>
-          {isLoggedIn ? <MyTabs /> : Login()}
-        </NavigationContainer>
+            <NavigationContainer>
+                {isLoggedIn ? <MyTabs /> : Login()}
+            </NavigationContainer>
       );
 }
 
