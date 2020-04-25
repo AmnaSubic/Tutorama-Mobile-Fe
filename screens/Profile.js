@@ -11,10 +11,9 @@ import {
     Header,
     Avatar
 } from 'react-native-elements';
-import AvatarPhoto from '../../assets/Avatar.jpeg'
+import AvatarPhoto from '../assets/Avatar.jpeg'
 
 export default function Profile ({navigation}) {
-
     const [user, setUser] = useState({
         username: 'amnasubic',
         firstname: 'Amna',

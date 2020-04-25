@@ -2,12 +2,10 @@ import React from 'react';
 import {
     View,
     Text,
-    StyleSheet,
-    Button
+    StyleSheet
 } from 'react-native';
 
 export default function Search ({navigation}) {
-
     return (
 
         <View style={styles.container}>
