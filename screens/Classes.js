@@ -5,7 +5,7 @@ import {
     StyleSheet
 } from 'react-native';
 
-export function MenuScreen () {
+export default function ClassesScreen () {
     return (
         <View style={styles.container}>
             <Text>Menu</Text>

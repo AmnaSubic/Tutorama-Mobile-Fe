@@ -5,7 +5,7 @@ import {
     StyleSheet
 } from 'react-native';
 
-export function SearchScreen () {
+export default function SearchScreen () {
     return (
         <View style={styles.container}>
             <Text>Search</Text>
