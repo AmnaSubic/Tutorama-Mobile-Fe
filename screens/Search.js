@@ -5,9 +5,8 @@ import {
     StyleSheet
 } from 'react-native';
 
-export default function Search ({navigation}) {
+export default function Search() {
     return (
-
         <View style={styles.container}>
             <Text>Search</Text>
         </View>

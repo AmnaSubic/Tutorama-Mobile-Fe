@@ -3,7 +3,6 @@ import {
     View,
     Text,
     StyleSheet,
-    SafeAreaView,
     ScrollView
 } from 'react-native';
 import {
@@ -12,8 +11,9 @@ import {
     Avatar
 } from 'react-native-elements';
 import AvatarPhoto from '../assets/Avatar.jpeg'
+import { SafeAreaView } from 'react-navigation';
 
-export default function Profile ({navigation}) {
+export default function Profile () {
     const [user, setUser] = useState({
         username: 'amnasubic',
         firstname: 'Amna',
@@ -30,9 +30,10 @@ export default function Profile ({navigation}) {
     return (
         <SafeAreaView style={styles.container}>
             <Header
+                placement='left'
                 containerStyle={{
                     backgroundColor: 'white',
-                    width: '100%',
+                    width: '100%'
                 }}
 
                 centerComponent={
@@ -138,7 +139,8 @@ const styles = StyleSheet.create({
         marginLeft: '5%',
     },
     title: {
-        fontSize: 20,
+        fontSize: 30,
+        fontWeight: 'bold'
     },
     list: {
         width: '100%',
