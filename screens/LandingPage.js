@@ -5,9 +5,9 @@ import {
     StyleSheet,
     Text,
     View
-} from "react-native";
-import Logo from "../assets/TutoramaLogo.png";
-import React from "react";
+} from 'react-native';
+import Logo from '../assets/TutoramaLogo.png';
+import React from 'react';
 
 export function LandingPage() {
     return (
