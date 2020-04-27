@@ -62,62 +62,62 @@ export default function Profile () {
                 <View style={styles.list}>
                     <ListItem
                         style={styles.item}
-                        rightElement={<Text style={styles.elementText}>{user.username}</Text>}
                         leftElement={<Text style={styles.elementText}>Username</Text>}
+                        rightElement={<Text style={styles.dataText}>{user.username}</Text>}
                         bottomDivider
                     />
                     <ListItem
                         style={styles.item}
-                        rightElement={<Text style={styles.elementText}>{user.firstname}</Text>}
                         leftElement={<Text style={styles.elementText}>First Name</Text>}
+                        rightElement={<Text style={styles.dataText}>{user.firstname}</Text>}
                         bottomDivider
                     />
                     <ListItem
                         style={styles.item}
-                        rightElement={<Text style={styles.elementText}>{user.lastname}</Text>}
                         leftElement={<Text style={styles.elementText}>Last Name</Text>}
+                        rightElement={<Text style={styles.dataText}>{user.lastname}</Text>}
                         bottomDivider
                     />
                     <ListItem
                         style={styles.item}
-                        rightElement={<Text style={styles.elementText}>{user.dob}</Text>}
                         leftElement={<Text style={styles.elementText}>Date of Birth</Text>}
+                        rightElement={<Text style={styles.dataText}>{user.dob}</Text>}
                         bottomDivider
                     />
                     <ListItem
                         style={styles.item}
-                        rightElement={<Text style={styles.elementText}>{user.gender}</Text>}
                         leftElement={<Text style={styles.elementText}>Gender</Text>}
+                        rightElement={<Text style={styles.dataText}>{user.gender}</Text>}
                         bottomDivider
                     />
                     <ListItem
                         style={styles.item}
-                        rightElement={<Text style={styles.elementText}>{user.address}</Text>}
                         leftElement={<Text style={styles.elementText}>Address</Text>}
+                        rightElement={<Text style={styles.dataText}>{user.address}</Text>}
                         bottomDivider
                     />
                     <ListItem
                         style={styles.item}
-                        rightElement={<Text style={styles.elementText}>{user.town}</Text>}
                         leftElement={<Text style={styles.elementText}>Town</Text>}
+                        rightElement={<Text style={styles.dataText}>{user.town}</Text>}
                         bottomDivider
                     />
                     <ListItem
                         style={styles.item}
-                        rightElement={<Text style={styles.elementText}>{user.country}</Text>}
                         leftElement={<Text style={styles.elementText}>Country</Text>}
+                        rightElement={<Text style={styles.dataText}>{user.country}</Text>}
                         bottomDivider
                     />
                     <ListItem
                         style={styles.item}
-                        rightElement={<Text style={styles.elementText}>{user.num}</Text>}
                         leftElement={<Text style={styles.elementText}>Phone Number</Text>}
+                        rightElement={<Text style={styles.dataText}>{user.num}</Text>}
                         bottomDivider
                     />
                     <ListItem
                         style={styles.item}
-                        rightElement={<Text style={styles.elementText}>{user.email}</Text>}
                         leftElement={<Text style={styles.elementText}>Email</Text>}
+                        rightElement={<Text style={styles.dataText}>{user.email}</Text>}
                         bottomDivider
                     />
                 </View>
@@ -149,12 +149,11 @@ const styles = StyleSheet.create({
         marginBottom: 50,
     },
     elementText: {
-        color: 'black',
-        fontSize: 16,
+        color: 'rgb(142,142,147)',
     },
-    back: {
-        fontSize: 20,
-        color: 'rgb(10,132,255)',
+    dataText: {
+        color: 'black',
+        fontWeight: '500',
     },
     scroll: {
         width: '100%',

@@ -17,41 +17,45 @@ export default function Classes ({navigation}) {
         {
             subject: 'Math',
             tutor: 'John Doe',
-            place: 'Falcon Street 12',
+            address: 'Falcon Street 12',
             date: '12/05/2020',
             start_time: '17:00',
             end_time: '18:30',
             price: '15',
+            status: 'Approval pending',
             key: '1'
         },
         {
             subject: 'Physics',
             tutor: 'Jane Doe',
-            place: 'Downtown Street 22',
+            address: 'Downtown Street 22',
             date: '30/04/2020',
             start_time: '10:00',
             end_time: '11:00',
             price: '10',
+            status: 'Accepted',
             key: '2'
         },
         {
             subject: 'Chemistry',
             tutor: 'John Doe',
-            place: 'Lorem Ipsum 123',
+            address: 'Lorem Ipsum 123',
             date: '11/05/2020',
             start_time: '11:00',
             end_time: '13:00',
             price: '30',
+            status: 'Rejected',
             key: '3'
         },
         {
             subject: 'German',
             tutor: 'Greta Schwarz',
-            place: 'Strawberry Street 1',
+            address: 'Strawberry Street 1',
             date: '10/05/2020',
             start_time: '12:00',
             end_time: '12:30',
             price: '20',
+            status: 'Accepted',
             key: '4'
         }
     ]);
@@ -76,8 +80,8 @@ export default function Classes ({navigation}) {
                         <TouchableOpacity onPress={() => navigation.navigate('Class', item)}>
                             <ListItem
                                 style={styles.item}
-                                leftElement={<Text>{item.subject}</Text>}
-                                rightElement={<Text>{item.date}</Text>}
+                                leftElement={<Text style={{fontWeight: '500'}}>{item.subject}</Text>}
+                                rightElement={<Text style={{color: 'gray'}}>{item.date}</Text>}
                                 chevron
                                 bottomDivider
                             />
