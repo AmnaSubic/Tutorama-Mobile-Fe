@@ -18,14 +18,3 @@ const screens = {
 const Stack = createStackNavigator(screens);
 export default Stack;
 
-
-/*const Stack = createStackNavigator();
-
-export default function ClassStackNavigation() {
-    return(
-        <Stack.Navigator initialRouteName='Classes'>
-            <Stack.Screen name='Classes' component={Classes} options={{headerShown: false}}/>
-            <Stack.Screen name='Class' component={Class}/>
-        </Stack.Navigator>
-    );
-}*/

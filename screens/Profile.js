@@ -43,7 +43,7 @@ export default function Profile () {
                     text: 'Edit',
                     style: {
                         fontSize: 20,
-                        color: 'rgb(10,132,255)',
+                        color: 'rgb(0,122,255)',
                     },
                 }}
             />
