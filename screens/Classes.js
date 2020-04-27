@@ -53,7 +53,7 @@ export default function Classes ({navigation}) {
             address: 'Strawberry Street 1',
             date: '10/05/2020',
             start_time: '12:00',
-            end_time: '12:30',
+            end_time: '13:00',
             price: '20',
             status: 'Accepted',
             key: '4'
