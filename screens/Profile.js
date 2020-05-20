@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     View,
     Text,
     StyleSheet,
-    ScrollView
+    ScrollView, ActivityIndicator
 } from 'react-native';
 import {
     ListItem,
@@ -14,114 +14,108 @@ import AvatarPhoto from '../assets/Avatar.jpeg'
 import { SafeAreaView } from 'react-navigation';
 
 export default function Profile () {
-    const [user, setUser] = useState({
-        username: 'amnasubic',
-        firstname: 'Amna',
-        lastname: 'Subic',
-        dob: '05/04/1998',
-        gender: 'Female',
-        address: 'Lorem Ipsum 123',
-        town: 'Dolor',
-        country: 'Amet',
-        num: '+387 62 123 456',
-        email: 'amna.subic@lorem.com',
-        type: 'Student'
-    })
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:3000/dev/users/1')
+            .then((response) => response.json())
+            .then((json) => setData(json.data))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+    }, []);
     return (
         <SafeAreaView style={styles.container}>
-            <Header
-                placement='left'
-                containerStyle={{
-                    backgroundColor: 'white',
-                    width: '100%'
-                }}
-
-                centerComponent={
-                    <Text style={styles.title}>{user.type} Profile</Text>
-                }
-                rightComponent={{
-                    text: 'Edit',
-                    style: {
-                        fontSize: 20,
-                        color: 'rgb(0,122,255)',
-                    },
-                }}
-            />
-            <ScrollView style={styles.scroll}>
-                <Avatar
-                    size={100}
-                    containerStyle={{
-                        alignSelf:'center',
-                        marginTop: 50,
-                        marginBottom: 50
-                    }}
-                    rounded
-                    title={'AS'}
-                    source={AvatarPhoto}
-                />
-                <View style={styles.list}>
-                    <ListItem
-                        style={styles.item}
-                        leftElement={<Text style={styles.elementText}>Username</Text>}
-                        rightElement={<Text style={styles.dataText}>{user.username}</Text>}
-                        bottomDivider
+            {isLoading ? <ActivityIndicator/> : (
+                <View style={styles.view}>
+                    <Header
+                        placement='left'
+                        containerStyle={{
+                            backgroundColor: 'white',
+                            width: '100%'
+                        }}
+                        centerComponent={
+                            <Text style={styles.title}>{data.tutor ? 'Tutor' : 'Student'} Profile</Text>
+                        }
+                        rightComponent={{
+                            text: 'Edit',
+                            style: {
+                                fontSize: 20,
+                                color: 'rgb(0,122,255)',
+                            },
+                        }}
                     />
-                    <ListItem
-                        style={styles.item}
-                        leftElement={<Text style={styles.elementText}>First Name</Text>}
-                        rightElement={<Text style={styles.dataText}>{user.firstname}</Text>}
-                        bottomDivider
-                    />
-                    <ListItem
-                        style={styles.item}
-                        leftElement={<Text style={styles.elementText}>Last Name</Text>}
-                        rightElement={<Text style={styles.dataText}>{user.lastname}</Text>}
-                        bottomDivider
-                    />
-                    <ListItem
-                        style={styles.item}
-                        leftElement={<Text style={styles.elementText}>Date of Birth</Text>}
-                        rightElement={<Text style={styles.dataText}>{user.dob}</Text>}
-                        bottomDivider
-                    />
-                    <ListItem
-                        style={styles.item}
-                        leftElement={<Text style={styles.elementText}>Gender</Text>}
-                        rightElement={<Text style={styles.dataText}>{user.gender}</Text>}
-                        bottomDivider
-                    />
-                    <ListItem
-                        style={styles.item}
-                        leftElement={<Text style={styles.elementText}>Address</Text>}
-                        rightElement={<Text style={styles.dataText}>{user.address}</Text>}
-                        bottomDivider
-                    />
-                    <ListItem
-                        style={styles.item}
-                        leftElement={<Text style={styles.elementText}>Town</Text>}
-                        rightElement={<Text style={styles.dataText}>{user.town}</Text>}
-                        bottomDivider
-                    />
-                    <ListItem
-                        style={styles.item}
-                        leftElement={<Text style={styles.elementText}>Country</Text>}
-                        rightElement={<Text style={styles.dataText}>{user.country}</Text>}
-                        bottomDivider
-                    />
-                    <ListItem
-                        style={styles.item}
-                        leftElement={<Text style={styles.elementText}>Phone Number</Text>}
-                        rightElement={<Text style={styles.dataText}>{user.num}</Text>}
-                        bottomDivider
-                    />
-                    <ListItem
-                        style={styles.item}
-                        leftElement={<Text style={styles.elementText}>Email</Text>}
-                        rightElement={<Text style={styles.dataText}>{user.email}</Text>}
-                        bottomDivider
-                    />
+                    <ScrollView style={styles.scroll}>
+                        <Avatar
+                            size={100}
+                            containerStyle={{
+                                alignSelf:'center',
+                                marginTop: 50,
+                                marginBottom: 50
+                            }}
+                            rounded
+                            title={'AS'}
+                            source={AvatarPhoto}
+                        />
+                        <View style={styles.list}>
+                            <ListItem
+                                style={styles.item}
+                                leftElement={<Text style={styles.elementText}>First Name</Text>}
+                                rightElement={<Text style={styles.dataText}>{data.firstname}</Text>}
+                                bottomDivider
+                            />
+                            <ListItem
+                                style={styles.item}
+                                leftElement={<Text style={styles.elementText}>Last Name</Text>}
+                                rightElement={<Text style={styles.dataText}>{data.lastname}</Text>}
+                                bottomDivider
+                            />
+                            <ListItem
+                                style={styles.item}
+                                leftElement={<Text style={styles.elementText}>Date of Birth</Text>}
+                                rightElement={<Text style={styles.dataText}>{data.dob}</Text>}
+                                bottomDivider
+                            />
+                            <ListItem
+                                style={styles.item}
+                                leftElement={<Text style={styles.elementText}>Gender</Text>}
+                                rightElement={<Text style={styles.dataText}>{data.gender ? 'Male' : 'Female'}</Text>}
+                                bottomDivider
+                            />
+                            <ListItem
+                                style={styles.item}
+                                leftElement={<Text style={styles.elementText}>Address</Text>}
+                                rightElement={<Text style={styles.dataText}>{data.address}</Text>}
+                                bottomDivider
+                            />
+                            <ListItem
+                                style={styles.item}
+                                leftElement={<Text style={styles.elementText}>Town</Text>}
+                                rightElement={<Text style={styles.dataText}>{data.town}</Text>}
+                                bottomDivider
+                            />
+                            <ListItem
+                                style={styles.item}
+                                leftElement={<Text style={styles.elementText}>Country</Text>}
+                                rightElement={<Text style={styles.dataText}>{data.country}</Text>}
+                                bottomDivider
+                            />
+                            <ListItem
+                                style={styles.item}
+                                leftElement={<Text style={styles.elementText}>Phone Number</Text>}
+                                rightElement={<Text style={styles.dataText}>{data.phone}</Text>}
+                                bottomDivider
+                            />
+                            <ListItem
+                                style={styles.item}
+                                leftElement={<Text style={styles.elementText}>Email</Text>}
+                                rightElement={<Text style={styles.dataText}>{data.email}</Text>}
+                                bottomDivider
+                            />
+                        </View>
+                    </ScrollView>
                 </View>
-            </ScrollView>
+            )}
         </SafeAreaView>
     );
 }
@@ -133,6 +127,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    view: {
+      width: '100%'
     },
     item: {
         width: '95%',
