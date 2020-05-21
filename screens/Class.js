@@ -30,10 +30,10 @@ export default function Class({navigation}) {
         <SafeAreaView style={styles.container}>
             <Card
                 containerStyle={styles.card}
-                title={navigation.getParam('subject')}>
+                title={navigation.getParam('name')}>
                 <ListItem
                     leftElement={<Text style={{color: 'rgb(142,142,147)'}}>Tutor</Text>}
-                    rightElement={<Text style={{fontWeight: '500'}}>{navigation.getParam('tutor')}</Text>}
+                    rightElement={<Text style={{fontWeight: '500'}}>{navigation.getParam('firstname')} {navigation.getParam('lastname')}</Text>}
                 />
                 <ListItem
                     leftElement={<Text style={{color: 'rgb(142,142,147)'}}>Date</Text>}
@@ -41,15 +41,15 @@ export default function Class({navigation}) {
                 />
                 <ListItem
                     leftElement={<Text style={{color: 'rgb(142,142,147)'}}>Start Time</Text>}
-                    rightElement={<Text style={{fontWeight: '500'}}>{navigation.getParam('start_time')}</Text>}
+                    rightElement={<Text style={{fontWeight: '500'}}>{navigation.getParam('start')}</Text>}
                 />
                 <ListItem
                     leftElement={<Text style={{color: 'rgb(142,142,147)'}}>End Time</Text>}
-                    rightElement={<Text style={{fontWeight: '500'}}>{navigation.getParam('end_time')}</Text>}
+                    rightElement={<Text style={{fontWeight: '500'}}>{navigation.getParam('end')}</Text>}
                 />
                 <ListItem
                     leftElement={<Text style={{color: 'rgb(142,142,147)'}}>Address</Text>}
-                    rightElement={<Text style={{fontWeight: '500'}}>{navigation.getParam('address')}</Text>}
+                    rightElement={<Text style={{fontWeight: '500'}}>{navigation.getParam('place')}</Text>}
                 />
                 <ListItem
                     leftElement={<Text style={{color: 'rgb(142,142,147)'}}>Price</Text>}
@@ -59,7 +59,7 @@ export default function Class({navigation}) {
                     leftElement={<Text style={{color: 'rgb(142,142,147)'}}>Status</Text>}
                     rightElement={<Text style={{fontWeight: '500', color: statusColor}}>{navigation.getParam('status')}</Text>}
                 />
-                {navigation.getParam('status') === 'Accepted'
+                {navigation.getParam('status') === 'accepted'
                 ? <View style={styles.buttonContainer}>
                     <Button
                         type='outline'
@@ -68,7 +68,7 @@ export default function Class({navigation}) {
                         buttonStyle={[styles.finishedButton, styles.button]}
                         icon={<Ionicons name='ios-checkmark' size={20} color='rgb(52,199,89)'/>}
                         iconRight
-                        onPress={() => navigation.setParams({status: 'Finished'})}
+                        onPress={() => navigation.setParams({status: 'finished'})}
                     />
                     <Button
                         type='outline'
@@ -77,7 +77,7 @@ export default function Class({navigation}) {
                         buttonStyle={[styles.cancelledButton, styles.button]}
                         icon={<Ionicons name='ios-close' size={20} color='rgb(255,59,48)' />}
                         iconRight
-                        onPress={() => navigation.setParams({status: 'Cancelled'})}
+                        onPress={() => navigation.setParams({status: 'cancelled'})}
                     />
                 </View>
                 : <Text> </Text>

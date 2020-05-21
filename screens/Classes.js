@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Text,
+    View,
+    ActivityIndicator,
     StyleSheet,
     FlatList,
     TouchableOpacity
@@ -13,81 +15,48 @@ import {
 
 
 export default function Classes ({navigation}) {
-    const [classes, setClasses] = useState([
-        {
-            subject: 'Math',
-            tutor: 'John Doe',
-            address: 'Falcon Street 12',
-            date: '12/05/2020',
-            start_time: '17:00',
-            end_time: '18:30',
-            price: '15',
-            status: 'Approval pending',
-            key: '1'
-        },
-        {
-            subject: 'Physics',
-            tutor: 'Jane Doe',
-            address: 'Downtown Street 22',
-            date: '30/04/2020',
-            start_time: '10:00',
-            end_time: '11:00',
-            price: '10',
-            status: 'Accepted',
-            key: '2'
-        },
-        {
-            subject: 'Chemistry',
-            tutor: 'John Doe',
-            address: 'Lorem Ipsum 123',
-            date: '11/05/2020',
-            start_time: '11:00',
-            end_time: '13:00',
-            price: '30',
-            status: 'Rejected',
-            key: '3'
-        },
-        {
-            subject: 'German',
-            tutor: 'Greta Schwarz',
-            address: 'Strawberry Street 1',
-            date: '10/05/2020',
-            start_time: '12:00',
-            end_time: '13:00',
-            price: '20',
-            status: 'Accepted',
-            key: '4'
-        }
-    ]);
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
 
+    useEffect(() => {
+        fetch('http://localhost:3000/dev/classes/student/1')
+            .then((response) => response.json())
+            .then((json) => setData(json.data))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+    }, []);
     return (
             <SafeAreaView style={styles.container}>
-                <Header
-                    placement='left'
-                    containerStyle={{
-                        backgroundColor: 'white',
-                        width: '100%'
-                    }}
+                {isLoading ? <ActivityIndicator/> : (
+                    <View style={styles.view}>
+                        <Header
+                            placement='left'
+                            containerStyle={{
+                                backgroundColor: 'white',
+                                width: '100%'
+                            }}
 
-                    centerComponent={
-                        <Text style={styles.title}>Classes</Text>
-                    }
-                />
-                <FlatList
-                    style={styles.list}
-                    data={classes}
-                    renderItem={({item}) => (
-                        <TouchableOpacity onPress={() => navigation.navigate('Class', item)}>
-                            <ListItem
-                                style={styles.item}
-                                leftElement={<Text style={{fontWeight: '500'}}>{item.subject}</Text>}
-                                rightElement={<Text style={{color: 'gray'}}>{item.date}</Text>}
-                                chevron
-                                bottomDivider
-                            />
-                        </TouchableOpacity>
-                    )}
-                />
+                            centerComponent={
+                                <Text style={styles.title}>Classes</Text>
+                            }
+                        />
+                        <FlatList
+                            style={styles.list}
+                            data={data}
+                            renderItem={({item}) => (
+                                <TouchableOpacity onPress={() => navigation.navigate('Class', item)}>
+                                    <ListItem
+                                        style={styles.item}
+                                        leftElement={<Text style={{fontWeight: '500'}}>{item.name}</Text>}
+                                        rightElement={<Text style={{color: 'gray'}}>{item.date}</Text>}
+                                        chevron
+                                        bottomDivider
+                                    />
+                                </TouchableOpacity>
+                            )}
+                        />
+                    </View>
+                )}
             </SafeAreaView>
     );
 }
@@ -109,5 +78,10 @@ const styles = StyleSheet.create({
     },
     list: {
         width: '100%'
-    }
+    },
+    view: {
+        width: '100%',
+        flex: 2
+    },
+
 });
