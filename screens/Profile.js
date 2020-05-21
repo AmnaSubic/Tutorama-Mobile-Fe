@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     View,
     Text,
     StyleSheet,
-    ScrollView, ActivityIndicator
+    ScrollView,
+    ActivityIndicator
 } from 'react-native';
 import {
     ListItem,
@@ -35,7 +36,7 @@ export default function Profile () {
                             width: '100%'
                         }}
                         centerComponent={
-                            <Text style={styles.title}>{data.tutor ? 'Tutor' : 'Student'} Profile</Text>
+                            <Text style={styles.title}>{data.istutor ? 'Tutor' : 'Student'} Profile</Text>
                         }
                         rightComponent={{
                             text: 'Edit',
