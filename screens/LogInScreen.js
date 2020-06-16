@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
 import {Input, Button} from 'react-native-elements';
+import App from "../App";
 
-function LogInScreen ({navigation, route}){
+export default function LogInScreen ({navigation, route}){
 
     //const {pass} = route.params;
 
@@ -10,20 +11,18 @@ function LogInScreen ({navigation, route}){
     const [password, setPassword] = useState();
 
     return(
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Log In to your account:</Text>
 
             <Text>Enter Username:</Text>
-            <Input placeholder="Username" onChange={(e) => setUsername(e.nativeEvent.text)}></Input>
+            <Input placeholder="Username" onChange={(e) => setUsername(e.nativeEvent.text)}/>
 
             <Text>Enter Password:</Text>
-            <Input placeholder="Password" onChange={(e) => setPassword(e.nativeEvent.text)}></Input>
+            <Input placeholder="Password" onChange={(e) => setPassword(e.nativeEvent.text)}/>
 
             <Button title="Log In" type="outline" style={styles.button}
 
-            onPress={() => {if(username === "Orhan" && password ==="Test123"){
-                navigation.navigate("Students")
-            }else{alert("Wrong Credentials, Try Again.")}
+            onPress={() => {username === "Orhan" && password ==="Test123" ? App(true) : alert("Wrong Credentials, Try Again.")
             }}
 
            
@@ -33,11 +32,10 @@ function LogInScreen ({navigation, route}){
         }}
     */
             />
-        </View>
+        </SafeAreaView>
     );
 };
 
-export default LogInScreen;
 
 const styles = StyleSheet.create({
     container: {

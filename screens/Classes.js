@@ -19,7 +19,7 @@ export default function Classes ({navigation}) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/dev/classes/student/1')
+        fetch('http://localhost:3000/dev/classes/2')
             .then((response) => response.json())
             .then((json) => setData(json.data))
             .catch((error) => console.error(error))
@@ -47,7 +47,7 @@ export default function Classes ({navigation}) {
                                 <TouchableOpacity onPress={() => navigation.navigate('Class', item)}>
                                     <ListItem
                                         style={styles.item}
-                                        leftElement={<Text style={{fontWeight: '500'}}>{item.name}</Text>}
+                                        leftElement={<Text style={{fontWeight: '500'}}>{item.subject}</Text>}
                                         rightElement={<Text style={{color: 'gray'}}>{item.date}</Text>}
                                         chevron
                                         bottomDivider

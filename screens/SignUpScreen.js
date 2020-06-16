@@ -1,25 +1,23 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {Text, StyleSheet, SafeAreaView} from 'react-native';
 import {Input, Button} from 'react-native-elements';
 
-function SignUp({navigation}){
+export default function SignUpScreen({navigation}){
 
     const [sifra, setSifra] = useState();
 
     return(
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Join Us!</Text>
             <Text style={styles.tekst}>Create an account:</Text>
             <Text>Username:</Text>
-            <Input placeholder="Username"></Input>
+            <Input placeholder="Username"/>
             <Text>Password:</Text>
-            <Input placeholder="Password" onChange={(e) => setSifra(e.nativeEvent.text)}></Input>
-            <Button title="Sign Up" type="outline" style={styles.button} onPress={()=>navigation.navigate("LogIn", {pass:sifra})}></Button>
-        </View>
+            <Input placeholder="Password" onChange={(e) => setSifra(e.nativeEvent.text)}/>
+            <Button title="Sign Up" type="outline" style={styles.button} onPress={() => navigation.navigate('WelcomeScreen')}/>
+        </SafeAreaView>
     );
 };
-
-export default SignUp;
 
 const styles = StyleSheet.create({
     container: {

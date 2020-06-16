@@ -23,7 +23,7 @@ export function LandingPage() {
             <View style={styles.bottomContainer}>
                 <View style={styles.buttonContainer}>
                     <Button
-                        title={"Register"}
+                        title={'Register'}
                         style={styles.button}
                         onPress={() => this.onPress()}
                         color="#fff"

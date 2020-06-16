@@ -11,7 +11,7 @@ import {
     Header,
     Avatar
 } from 'react-native-elements';
-import AvatarPhoto from '../assets/Avatar.jpeg'
+import AvatarPhoto from '../assets/graduate.png'
 import { SafeAreaView } from 'react-navigation';
 
 export default function Profile () {
@@ -19,7 +19,7 @@ export default function Profile () {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/dev/users/1')
+        fetch('http://localhost:3000/dev/user/amna.subic@stu.ssst.edu.ba')
             .then((response) => response.json())
             .then((json) => setData(json.data))
             .catch((error) => console.error(error))
@@ -36,15 +36,15 @@ export default function Profile () {
                             width: '100%'
                         }}
                         centerComponent={
-                            <Text style={styles.title}>{data.istutor ? 'Tutor' : 'Student'} Profile</Text>
+                            <Text style={styles.title}>Student Profile</Text>
                         }
-                        rightComponent={{
+                        /*rightComponent={{
                             text: 'Edit',
                             style: {
                                 fontSize: 20,
                                 color: 'rgb(0,122,255)',
                             },
-                        }}
+                        }}*/
                     />
                     <ScrollView style={styles.scroll}>
                         <Avatar
@@ -62,13 +62,13 @@ export default function Profile () {
                             <ListItem
                                 style={styles.item}
                                 leftElement={<Text style={styles.elementText}>First Name</Text>}
-                                rightElement={<Text style={styles.dataText}>{data.firstname}</Text>}
+                                rightElement={<Text style={styles.dataText}>{data.firstName}</Text>}
                                 bottomDivider
                             />
                             <ListItem
                                 style={styles.item}
                                 leftElement={<Text style={styles.elementText}>Last Name</Text>}
-                                rightElement={<Text style={styles.dataText}>{data.lastname}</Text>}
+                                rightElement={<Text style={styles.dataText}>{data.lastName}</Text>}
                                 bottomDivider
                             />
                             <ListItem

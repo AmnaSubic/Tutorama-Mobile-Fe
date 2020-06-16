@@ -33,7 +33,7 @@ export default function Class({navigation}) {
                 title={navigation.getParam('name')}>
                 <ListItem
                     leftElement={<Text style={{color: 'rgb(142,142,147)'}}>Tutor</Text>}
-                    rightElement={<Text style={{fontWeight: '500'}}>{navigation.getParam('firstname')} {navigation.getParam('lastname')}</Text>}
+                    rightElement={<Text style={{fontWeight: '500'}}>{navigation.getParam('name')} {navigation.getParam('surname')}</Text>}
                 />
                 <ListItem
                     leftElement={<Text style={{color: 'rgb(142,142,147)'}}>Date</Text>}

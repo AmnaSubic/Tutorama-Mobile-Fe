@@ -19,9 +19,9 @@ export default class Search extends React.Component {
     }
 
     componentDidMount() {
-        return fetch('https://my-json-server.typicode.com/amnicaaaa/tutorama-mobile-db-json/tutors')
-            .then(response => response.json())
-            .then(responseJson => {
+        return fetch('http://localhost:3000/dev/services')
+            .then((response) => response.json())
+            .then((responseJson) => {
                 this.setState(
                     {
                         isLoading: false,
@@ -46,7 +46,7 @@ export default class Search extends React.Component {
 
     SearchFilterFunction(text) {
         const newData = this.arrayholder.filter(function (item) {
-            const itemData = `${item.fn} || ${item.ln}` ? `${item.fn} || ${item.ln}`.toUpperCase() : ''.toUpperCase();
+            const itemData = `${item.subject}` ? `${item.subject}`.toUpperCase() : ''.toUpperCase();
             const textData = text.toUpperCase();
             return itemData.indexOf(textData) > -1;
         });
@@ -98,7 +98,8 @@ export default class Search extends React.Component {
                         ItemSeparatorComponent={this.ListViewItemSeparator}
                         renderItem={({item}) => (
                             <ListItem
-                                leftElement={<Text>{item.fn} {item.ln}</Text>}
+                                leftElement={<Text>{item.subject}</Text>}
+                                rightElement={<Text>{item.price} KM/h</Text>}
                             />
                         )}
                     />
