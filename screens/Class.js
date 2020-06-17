@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-navigation';
 import {
     View,
     StyleSheet,
-    Text
+    Text, ActivityIndicator
 } from 'react-native';
 import {
     Button,
@@ -15,25 +15,41 @@ import { Ionicons } from '@expo/vector-icons';
 
 export default function Class({navigation}) {
     let statusColor;
-    if (navigation.getParam('status') === 'Rejected')
-        statusColor = 'rgb(255,59,48)'
-    else if (navigation.getParam('status') === 'Cancelled')
+    if (navigation.getParam('status') === 'Cancelled')
         statusColor = 'rgb(255,149,0)'
-    else if (navigation.getParam('status') === 'Accepted')
-        statusColor = 'rgb(52,199,89)'
-    else if (navigation.getParam('status') === 'Approval pending')
+    else if (navigation.getParam('status') === 'Finished')
         statusColor = 'rgb(88,86,214)'
     else
-        statusColor = 'rgb(142,142,147)'
+        statusColor = 'rgb(52,199,89)'
+
+
+    const [isLoading, setLoading] = useState(true);
+
+    const [service, setService] = useState({
+        service_ID: null,
+        tutor: null,
+        subject: null,
+        level: null,
+        price: null,
+    });
+
+    useEffect(() => {
+        fetch('http://localhost:3000/dev/service/' + navigation.getParam('service'))
+            .then((response) => response.json())
+            .then((json) => setService(json.data))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+    }, []);
 
     return (
         <SafeAreaView style={styles.container}>
+            {isLoading ? <ActivityIndicator/> : (
             <Card
                 containerStyle={styles.card}
-                title={navigation.getParam('name')}>
+                title={service.subject}>
                 <ListItem
                     leftElement={<Text style={{color: 'rgb(142,142,147)'}}>Tutor</Text>}
-                    rightElement={<Text style={{fontWeight: '500'}}>{navigation.getParam('name')} {navigation.getParam('surname')}</Text>}
+                    rightElement={<Text onPress={() => navigation.navigate('Tutor', service)} style={{fontWeight: '500', color: 'rgb(0,122,255)'}}>View Info</Text>}
                 />
                 <ListItem
                     leftElement={<Text style={{color: 'rgb(142,142,147)'}}>Date</Text>}
@@ -59,12 +75,12 @@ export default function Class({navigation}) {
                     leftElement={<Text style={{color: 'rgb(142,142,147)'}}>Status</Text>}
                     rightElement={<Text style={{fontWeight: '500', color: statusColor}}>{navigation.getParam('status')}</Text>}
                 />
-                {navigation.getParam('status') === 'accepted'
+                {navigation.getParam('status') === null
                 ? <View style={styles.buttonContainer}>
                     <Button
                         type='outline'
                         titleStyle={[styles.buttonTitle, { color: 'rgb(52,199,89)'}]}
-                        title='Class Held   '
+                        title='Class Held  '
                         buttonStyle={[styles.finishedButton, styles.button]}
                         icon={<Ionicons name='ios-checkmark' size={20} color='rgb(52,199,89)'/>}
                         iconRight
@@ -80,9 +96,9 @@ export default function Class({navigation}) {
                         onPress={() => navigation.setParams({status: 'cancelled'})}
                     />
                 </View>
-                : <Text> </Text>
+                    : <Text> </Text>
                 }
-            </Card>
+            </Card>)}
         </SafeAreaView>
     );
 }
@@ -113,6 +129,10 @@ const styles = StyleSheet.create({
     cancelledButton: {
         borderColor: 'rgb(255,59,48)',
     },
+    startedButton: {
+        borderColor: 'rgb(88,86,214)'
+    },
+
     buttonContainer: {
         width: '100%',
         flex: 2,

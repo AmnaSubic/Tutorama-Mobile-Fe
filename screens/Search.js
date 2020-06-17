@@ -1,129 +1,54 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     View,
     FlatList,
     Text,
-    StyleSheet, ActivityIndicator
+    StyleSheet, ActivityIndicator, TouchableOpacity
 } from 'react-native';
 import {
     SearchBar,
-    ListItem
+    ListItem, Button
 } from 'react-native-elements';
 import { SafeAreaView } from 'react-navigation';
 
-export default class Search extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { isLoading: true, search: ''};
-        this.arrayholder = [];
-    }
+export default function Search({navigation}) {
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
 
-    componentDidMount() {
-        return fetch('http://localhost:3000/dev/services')
+    useEffect(() => {
+        fetch('http://localhost:3000/dev/services')
             .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState(
-                    {
-                        isLoading: false,
-                        dataSource: responseJson,
-                    },
-                    function () {
-                        this.arrayholder = responseJson;
-                    }
-                );
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }
-
-    search = text => {
-        console.log(text);
-    };
-    clear = () => {
-        this.search.clear();
-    };
-
-    SearchFilterFunction(text) {
-        const newData = this.arrayholder.filter(function (item) {
-            const itemData = `${item.subject}` ? `${item.subject}`.toUpperCase() : ''.toUpperCase();
-            const textData = text.toUpperCase();
-            return itemData.indexOf(textData) > -1;
-        });
-
-        this.setState({
-            dataSource: newData,
-            search: text,
-        });
-    }
-
-    ListViewItemSeparator = () => {
-        return (
-            <View
-                style={{
-                    height: 0.3,
-                    width: '90%',
-                    backgroundColor: '#080808'
-                }}
-            />
-        );
-    };
-
-    render() {
-        if (this.state.isLoading) {
-            return (
-                <View style={{flex: 1, paddingTop: 20}}>
-                    <ActivityIndicator/>
-                </View>
-            );
-        }
-
-        return (
-            <SafeAreaView style={styles.container}>
-                <SearchBar
-                    placeholder='Search Tutors and Subjects'
-                    searchIcon={{size: 24}}
-                    onChangeText={text => this.SearchFilterFunction(text)}
-                    onClear={text => this.SearchFilterFunction('')}
-                    value={this.state.search}
-                    cancelIcon
-                    showCancel
-                    containerStyle={styles.searchBar}
-                    inputContainerStyle={styles.inputSearchBar}
-                    inputStyle={styles.inputText}
-                />
-                <View>
-                    <FlatList
-                        data={this.state.dataSource}
-                        ItemSeparatorComponent={this.ListViewItemSeparator}
-                        renderItem={({item}) => (
+            .then((json) => setData(json.data))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+    }, []);
+    return (
+        <SafeAreaView style={styles.container}>
+            {isLoading ? <ActivityIndicator/> : (
+            <View>
+                <FlatList
+                    data={data}
+                    renderItem={({item}) => (
                             <ListItem
-                                leftElement={<Text>{item.subject}</Text>}
-                                rightElement={<Text>{item.price} KM/h</Text>}
-                            />
-                        )}
-                    />
-                </View>
-            </SafeAreaView>
-        );
-    }
+                                title={item.subject}
+                                rightElement={
+                                    <View>
+                                        <Text style={{ marginBottom: 5, paddingTop: 6, textAlign: "center", height: 30, width: 75, borderRadius: 5,borderColor: 'rgb(0,122,255)', borderWidth: 1, color: 'rgb(0,122,255)'}} onPress={() => navigation.navigate('Schedule', item)}>Schedule</Text>
+                                        <Text style={{paddingTop: 6, textAlign: "center", height: 30, width: 75, borderRadius: 5,borderColor: 'rgb(52,199,89)', borderWidth: 1, color: 'rgb(52,199,89)'}} onPress={() => navigation.navigate('Service', item)}>View Info</Text>
+                                    </View>
+                                }
+                                subtitle={item.price + 'KM/h'}
+                                bottomDivider />
+                            )}
+                />
+            </View>
+            )}
+        </SafeAreaView>
+    );
 }
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
     },
-    searchBar: {
-        width: '100%',
-        backgroundColor: 'white',
-        borderBottomWidth: 0,
-        borderTopWidth: 0,
-    },
-    inputSearchBar: {
-        borderRadius: 10,
-        backgroundColor: 'rgb(242,242,247)'
-    },
-    inputText: {
-        color: 'rgb(142,142,147)'
-    }
 });

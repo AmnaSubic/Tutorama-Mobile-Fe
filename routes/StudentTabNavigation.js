@@ -1,14 +1,14 @@
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import Search from '../screens/Search';
 import Profile from '../screens/Profile';
 import React from 'react';
 import Stack from './Stack';
 import {createAppContainer} from 'react-navigation';
+import ScheduleStack from './ScheduleStack';
 
 const screens = {
     Search: {
-        screen: Search,
+        screen: ScheduleStack,
         navigationOptions: {
             tabBarIcon: ({ tintColor }) => (
                 <Ionicons name='ios-search' color={tintColor} size={25}/>
