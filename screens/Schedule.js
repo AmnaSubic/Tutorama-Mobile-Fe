@@ -91,7 +91,7 @@ export default function Schedule({navigation}) {
                     title={'Save'}
                     onPress={() => save()}
                 />
-                <Text>{show ? 'Class Added' : ''}</Text>
+                <Text style={{fontWeight: '500', color: 'rgb(52, 199, 89)', fontSize: 30, marginBottom: 10}}>{show ? 'Class Added' : ''}</Text>
             </ScrollView>
         </SafeAreaView>
     )
