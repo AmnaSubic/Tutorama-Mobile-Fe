@@ -1,15 +1,14 @@
 import React from 'react';
 import StudentTabNavigation from './routes/StudentTabNavigation';
 import { NavigationContainer } from '@react-navigation/native';
-import LoginRegisterStack from './routes/LoginRegisterStack';
-import {useState} from 'react';
+import {LandingPage} from "./screens/LandingPage";
 
 export default function App(){
    let isLoggedIn = true;
     //if (val===true) isLoggedIn = true;
     return (
             <NavigationContainer>
-               {isLoggedIn ? <StudentTabNavigation/> : <LoginRegisterStack/>}
+               {isLoggedIn ? <StudentTabNavigation/> : <LandingPage/>}
             </NavigationContainer>
       );
 }

@@ -47,7 +47,7 @@ export default function Classes ({navigation}) {
                                 <TouchableOpacity onPress={() => navigation.navigate('Class', item)}>
                                     <ListItem
                                         style={styles.item}
-                                        leftElement={<Text style={{fontWeight: '500'}}>{item.subject}</Text>}
+                                        leftElement={<Text style={{fontWeight: '500'}}>{item.Service.subject}</Text>}
                                         rightElement={<Text style={{color: 'gray'}}>{item.date}</Text>}
                                         chevron
                                         bottomDivider

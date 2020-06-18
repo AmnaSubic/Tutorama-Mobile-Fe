@@ -42,7 +42,7 @@ export default function Class({navigation}) {
     }, []);
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView>
             {isLoading ? <ActivityIndicator/> : (
             <Card
                 containerStyle={styles.card}
@@ -104,16 +104,7 @@ export default function Class({navigation}) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        width: '100%',
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    card: {
-        width: '95%',
-    },
+
     buttonTitle: {
         fontSize: 15
     },
@@ -129,13 +120,10 @@ const styles = StyleSheet.create({
     cancelledButton: {
         borderColor: 'rgb(255,59,48)',
     },
-    startedButton: {
-        borderColor: 'rgb(88,86,214)'
-    },
 
     buttonContainer: {
         width: '100%',
-        flex: 2,
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingTop: 20,
